@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dalgona Bakeri – Trondheim</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F9F4EC;
+    --warm-white: #FDFAF5;
+    --sand: #E8DCC8;
+    --caramel: #C49A6C;
+    --brown: #7A5230;
+    --dark: #2A1F14;
+    --rose: #D4846A;
+    --rose-light: #F0D5CB;
+    --text: #3A2E22;
+    --muted: #8C7B6A;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 4rem;
+    background: rgba(253,250,245,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(196,154,108,0.15);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--dark);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--rose); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--rose); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 4rem 6rem 6rem;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-tag {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 7vw, 6rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--dark);
+    letter-spacing: -0.02em;
+    margin-bottom: 2rem;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--rose);
+  }
+  .hero-desc {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--muted);
+    max-width: 380px;
+    margin-bottom: 3rem;
+  }
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--dark);
+    color: var(--cream);
+    text-decoration: none;
+    padding: 0.9rem 2rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: background 0.25s, transform 0.2s;
+  }
+  .hero-cta:hover { background: var(--rose); transform: translateY(-1px); }
+  .hero-cta-arrow { font-size: 1rem; transition: transform 0.2s; }
+  .hero-cta:hover .hero-cta-arrow { transform: translateX(4px); }
+
+  .hero-right {
+    position: relative;
+    background: var(--sand);
+    overflow: hidden;
+  }
+  .hero-visual {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .hero-circle {
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    background: var(--rose-light);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .hero-circle::before {
+    content: '';
+    position: absolute;
+    width: 360px; height: 360px;
+    border-radius: 50%;
+    border: 1px solid rgba(196,154,108,0.3);
+  }
+  .hero-circle-inner {
+    font-size: 9rem;
+    filter: drop-shadow(0 8px 24px rgba(122,82,48,0.15));
+    animation: float 4s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  .hero-badge {
+    position: absolute;
+    bottom: 3rem; right: 3rem;
+    background: var(--dark);
+    color: var(--cream);
+    padding: 1.25rem 1.5rem;
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .hero-badge-num {
+    font-size: 2.5rem;
+    font-weight: 600;
+    line-height: 1;
+    display: block;
+  }
+  .hero-badge-stars { color: var(--caramel); font-size: 0.75rem; margin: 0.25rem 0; }
+  .hero-badge-text { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.7; }
+
+  /* ── TICKER ── */
+  .ticker {
+    background: var(--dark);
+    color: var(--cream);
+    padding: 0.75rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .ticker-inner {
+    display: inline-flex; gap: 0;
+    animation: ticker 25s linear infinite;
+  }
+  .ticker-item {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0 3rem;
+    color: var(--sand);
+  }
+  .ticker-dot {
+    color: var(--rose);
+    padding: 0 0.5rem;
+  }
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 6rem 6rem; }
+  .section-tag {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rose);
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    font-weight: 300;
+    color: var(--dark);
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+  }
+
+  /* ── ABOUT ── */
+  .about {
+    background: var(--cream);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+  .about-text p {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+  }
+  .about-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+  .feature-item {
+    padding: 1.5rem;
+    background: var(--warm-white);
+    border-left: 3px solid var(--rose);
+  }
+  .feature-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+  .feature-title {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--dark);
+    margin-bottom: 0.25rem;
+    letter-spacing: 0.04em;
+  }
+  .feature-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+
+  .about-visual {
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .about-box-main {
+    width: 100%;
+    aspect-ratio: 3/4;
+    max-height: 480px;
+    background: var(--sand);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .about-box-main::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(212,132,106,0.08) 0%, transparent 60%);
+  }
+  .about-float {
+    position: absolute;
+    bottom: -1.5rem; left: -1.5rem;
+    background: var(--rose);
+    color: white;
+    padding: 1.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    max-width: 220px;
+    line-height: 1.4;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+  }
+
+  /* ── MENU ── */
+  .menu { background: var(--warm-white); }
+  .menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 3.5rem;
+  }
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  .menu-card {
+    background: var(--cream);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: default;
+  }
+  .menu-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(42,31,20,0.1);
+  }
+  .menu-card-visual {
+    height: 200px;
+    background: var(--sand);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 5rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s;
+  }
+  .menu-card:hover .menu-card-visual { transform: scale(1.04); }
+  .menu-card-visual.v2 { background: var(--rose-light); }
+  .menu-card-visual.v3 { background: #E8EDD4; }
+  .menu-card-visual.v4 { background: #E4DAF0; }
+  .menu-card-visual.v5 { background: #DAE8E4; }
+  .menu-card-visual.v6 { background: #F0E4DA; }
+  .menu-card-body { padding: 1.5rem; }
+  .menu-card-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--dark);
+    margin-bottom: 0.4rem;
+  }
+  .menu-card-desc {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .menu-card-tag {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: var(--rose-light);
+    color: var(--rose);
+    padding: 0.3rem 0.8rem;
+    font-weight: 500;
+  }
+
+  /* ── REVIEWS ── */
+  .reviews { background: var(--dark); color: var(--cream); }
+  .reviews .section-title { color: var(--cream); }
+  .reviews .section-tag { color: var(--caramel); }
+  .reviews-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 3.5rem;
+  }
+  .reviews-score {
+    text-align: right;
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .reviews-score-num {
+    font-size: 5rem;
+    font-weight: 300;
+    color: var(--caramel);
+    line-height: 1;
+  }
+  .reviews-score-stars { color: var(--caramel); font-size: 1.2rem; margin: 0.5rem 0; }
+  .reviews-score-count { font-size: 0.8rem; opacity: 0.6; letter-spacing: 0.1em; }
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .review-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 2rem;
+    position: relative;
+    transition: background 0.25s;
+  }
+  .review-card:hover { background: rgba(255,255,255,0.07); }
+  .review-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    color: var(--rose);
+    line-height: 0.5;
+    margin-bottom: 1rem;
+    font-style: italic;
+  }
+  .review-text {
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: rgba(253,250,245,0.75);
+    margin-bottom: 1.5rem;
+  }
+  .review-author {
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .review-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--rose);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem; font-weight: 500; color: white;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .review-name { font-size: 0.85rem; font-weight: 500; color: var(--cream); }
+  .review-stars { font-size: 0.75rem; color: var(--caramel); }
+
+  /* ── INFO ── */
+  .info {
+    background: var(--cream);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+  .hours-table { width: 100%; margin-top: 1.5rem; border-collapse: collapse; }
+  .hours-table td {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(196,154,108,0.2);
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+  .hours-table td:first-child { font-weight: 500; color: var(--text); }
+  .hours-table td:last-child { text-align: right; }
+  .hours-table tr:last-child td { border-bottom: none; }
+  .open-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: #D4EBD4;
+    color: #2D6E2D;
+    padding: 0.2rem 0.65rem;
+    margin-left: 0.5rem;
+    font-weight: 500;
+  }
+  .closed-badge {
+    background: #F0D5CB;
+    color: var(--rose);
+  }
+
+  .contact-info { margin-top: 1.5rem; }
+  .contact-row {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid rgba(196,154,108,0.2);
+  }
+  .contact-row:last-child { border-bottom: none; }
+  .contact-icon { font-size: 1.25rem; color: var(--rose); flex-shrink: 0; margin-top: 2px; }
+  .contact-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.25rem; }
+  .contact-val { font-size: 0.95rem; color: var(--text); font-weight: 400; }
+  .contact-val a { color: var(--rose); text-decoration: none; }
+  .contact-val a:hover { text-decoration: underline; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    color: rgba(253,250,245,0.5);
+    padding: 3rem 6rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--cream);
+    letter-spacing: 0.06em;
+  }
+  .footer-logo span { color: var(--rose); }
+  .footer-text { font-size: 0.8rem; }
+  .footer-social { display: flex; gap: 1.25rem; }
+  .footer-social a {
+    color: rgba(253,250,245,0.5);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .footer-social a:hover { color: var(--rose); }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 7rem 1.5rem 3rem; }
+    .hero-right { min-height: 320px; }
+    section { padding: 4rem 1.5rem; }
+    .about, .info { grid-template-columns: 1fr; gap: 2.5rem; }
+    .menu-grid, .reviews-grid { grid-template-columns: 1fr 1fr; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2.5rem 1.5rem; }
+  }
+  @media (max-width: 600px) {
+    .menu-grid { grid-template-columns: 1fr; }
+    .reviews-grid { grid-template-columns: 1fr; }
+    .about-features { grid-template-columns: 1fr; }
+    .hero-badge { bottom: 1rem; right: 1rem; padding: 1rem; }
+    .hero-badge-num { font-size: 2rem; }
+    .hero-circle { width: 260px; height: 260px; }
+    .hero-circle-inner { font-size: 6rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Dalgona<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#om">Om oss</a></li>
+    <li><a href="#meny">Meny</a></li>
+    <li><a href="#anmeldelser">Anmeldelser</a></li>
+    <li><a href="#kontakt">Kontakt</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="topp">
+  <div class="hero-left">
+    <p class="hero-tag">Koreansk bakeri · Trondheim</p>
+    <h1 class="hero-title">Håndlaget<br>med <em>kjærlighet</em><br>fra Korea</h1>
+    <p class="hero-desc">Autentisk koreansk bakst midt i Trondheim. Vi bringer Sørkoreas deilige bakverk til Midtbyen – fra myke saltbrød til sprø pølseruller.</p>
+    <a href="#meny" class="hero-cta">
+      Se vår meny
+      <span class="hero-cta-arrow">→</span>
+    </a>
+  </div>
+  <div class="hero-right">
+    <div class="hero-visual">
+      <div class="hero-circle">
+        <div class="hero-circle-inner">🍞</div>
+      </div>
+      <div class="hero-badge">
+        <span class="hero-badge-num">5,0</span>
+        <div class="hero-badge-stars">★★★★★</div>
+        <span class="hero-badge-text">38 anmeldelser</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-inner">
+    <span class="ticker-item">Saltbrød<span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Pølseruller<span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Koreansk bakst<span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Daglig fersk<span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Kongens gate 48<span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Åpent tirs–søn<span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Saltbrød<span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Pølseruller<span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Koreansk bakst<span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Daglig fersk<span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Kongens gate 48<span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Åpent tirs–søn<span class="ticker-dot">✦</span></span>
+  </div>
+</div>
+
+<!-- OM OSS -->
+<section class="about" id="om">
+  <div class="about-text">
+    <p class="section-tag reveal">Vår historie</p>
+    <h2 class="section-title reveal reveal-delay-1">Et lite stykke<br>Korea i Trondheim</h2>
+    <p class="reveal reveal-delay-2">Vi er Trondheims første autentiske koreanske bakeri. Da vi åpnet dørene våre i Kongens gate, ønsket vi å fylle et tomrom i byens matkultur – det pikante, velsmakende baket som er så elsket i Asia, men sjelden å finne her hjemme.</p>
+    <p class="reveal reveal-delay-2">Hos oss er alt bakt fersk daglig, med kvalitetsråvarer og oppskrifter fra Korea. Vi har det for å by på noe litt annerledes – og dommerne er dere som besøker oss. Så langt har svaret vært overveldende.</p>
+    <div class="about-features reveal reveal-delay-3">
+      <div class="feature-item">
+        <div class="feature-icon">🥐</div>
+        <div class="feature-title">Fersk daglig</div>
+        <div class="feature-desc">Alt bakes fersk til åpning hver dag</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🇰🇷</div>
+        <div class="feature-title">Autentiske oppskrifter</div>
+        <div class="feature-desc">Tradisjonelt koreansk håndverk</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🫶</div>
+        <div class="feature-title">Hjertelig service</div>
+        <div class="feature-desc">Vi ønsker alle hjertelig velkommen</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🎵</div>
+        <div class="feature-title">Hyggelig atmosfære</div>
+        <div class="feature-desc">Fin musikk og et rent, trivelig lokale</div>
+      </div>
+    </div>
+  </div>
+  <div class="about-visual reveal reveal-delay-2">
+    <div class="about-box-main">🫓</div>
+    <div class="about-float">
+      "Vi merket at Trondheim manglet et ekte koreansk bakeri – så vi åpnet ett."
+    </div>
+  </div>
+</section>
+
+<!-- MENY -->
+<section class="menu" id="meny">
+  <div class="menu-header">
+    <div>
+      <p class="section-tag reveal">Hva vi lager</p>
+      <h2 class="section-title reveal reveal-delay-1">Vår meny</h2>
+    </div>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-card reveal">
+      <div class="menu-card-visual">🧂🍞</div>
+      <div class="menu-card-body">
+        <div class="menu-card-name">Saltbrød</div>
+        <div class="menu-card-desc">Vårt signaturprodukt. Sprøtt utenpå, luftig inni – lett saltet og utrolig tilfredsstillende.</div>
+        <span class="menu-card-tag">Bestseller</span>
+      </div>
+    </div>
+    <div class="menu-card reveal reveal-delay-1">
+      <div class="menu-card-visual v2">🌭</div>
+      <div class="menu-card-body">
+        <div class="menu-card-name">Pølseruller</div>
+        <div class="menu-card-desc">Mykt brioche-deig viklet rundt saftige pølser. Koreansk street food på sitt beste.</div>
+        <span class="menu-card-tag">Populær</span>
+      </div>
+    </div>
+    <div class="menu-card reveal reveal-delay-2">
+      <div class="menu-card-visual v3">🥐</div>
+      <div class="menu-card-body">
+        <div class="menu-card-name">Smørkringle</div>
+        <div class="menu-card-desc">Lagdelt, smørrik koreansk pastry med karamellisert bunn og sprø lag.</div>
+        <span class="menu-card-tag">Nybakt</span>
+      </div>
+    </div>
+    <div class="menu-card reveal reveal-delay-1">
+      <div class="menu-card-visual v4">🍡</div>
+      <div class="menu-card-body">
+        <div class="menu-card-name">Søte bakverk</div>
+        <div class="menu-card-desc">Et utvalg av koreanske søte spesialiteter som varierer etter sesong og humør.</div>
+        <span class="menu-card-tag">Sesongmeny</span>
+      </div>
+    </div>
+    <div class="menu-card reveal reveal-delay-2">
+      <div class="menu-card-visual v5">🧁</div>
+      <div class="menu-card-body">
+        <div class="menu-card-name">Koreansk smørkake</div>
+        <div class="menu-card-desc">Saftig og myk med unik koreansk smørkremtopping. En festlig favoritt.</div>
+        <span class="menu-card-tag">Spesialitet</span>
+      </div>
+    </div>
+    <div class="menu-card reveal reveal-delay-3">
+      <div class="menu-card-visual v6">☕</div>
+      <div class="menu-card-body">
+        <div class="menu-card-name">Drikke</div>
+        <div class="menu-card-desc">Kaffe og varme drikker som passer perfekt til alle våre bakverk.</div>
+        <span class="menu-card-tag">Til bakeriet</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ANMELDELSER -->
+<section class="reviews" id="anmeldelser">
+  <div class="reviews-header">
+    <div>
+      <p class="section-tag reveal">Hva folk sier</p>
+      <h2 class="section-title reveal reveal-delay-1">Anmeldelser</h2>
+    </div>
+    <div class="reviews-score reveal">
+      <div class="reviews-score-num">5,0</div>
+      <div class="reviews-score-stars">★★★★★</div>
+      <div class="reviews-score-count">38 Google-anmeldelser</div>
+    </div>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card reveal">
+      <div class="review-quote">"</div>
+      <p class="review-text">Så spennende å endelig ha et autentisk koreansk bakeri! Pølserullene var perfekte – jeg spiste opp alt før jeg husket å ta bilde. Saltbrødet var nydelig.</p>
+      <div class="review-author">
+        <div class="review-avatar">CK</div>
+        <div>
+          <div class="review-name">Cat K.</div>
+          <div class="review-stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal reveal-delay-1">
+      <div class="review-quote">"</div>
+      <p class="review-text">Veldig godt saltbrød og godt utvalg av bakst her. Asiatisk stil med «savoury»-bakst som kanskje ikke er like vanlig i Norge – og det er en herlig forandring.</p>
+      <div class="review-author">
+        <div class="review-avatar">CC</div>
+        <div>
+          <div class="review-name">Chantelle C.</div>
+          <div class="review-stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal reveal-delay-2">
+      <div class="review-quote">"</div>
+      <p class="review-text">Nytt bakeri i byen. Vi ble tatt imot av to smilende damer i et fint og rent lokale med asiatisk musikk. Vi kjøpte ett av hvert – og angret ikke på ett eneste valg.</p>
+      <div class="review-author">
+        <div class="review-avatar">MB</div>
+        <div>
+          <div class="review-name">Martina B.</div>
+          <div class="review-stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAKT & ÅPNINGSTIDER -->
+<section class="info" id="kontakt">
+  <div>
+    <p class="section-tag reveal">Besøk oss</p>
+    <h2 class="section-title reveal reveal-delay-1">Åpningstider</h2>
+    <table class="hours-table reveal reveal-delay-2">
+      <tbody>
+        <tr><td>Mandag</td><td>Stengt <span class="open-badge closed-badge">Stengt</span></td></tr>
+        <tr><td>Tirsdag</td><td>11:00 – 16:00</td></tr>
+        <tr><td>Onsdag</td><td>11:00 – 16:00</td></tr>
+        <tr><td>Torsdag</td><td>11:00 – 16:00 <span class="open-badge">Åpent nå</span></td></tr>
+        <tr><td>Fredag</td><td>11:00 – 16:00</td></tr>
+        <tr><td>Lørdag</td><td>11:00 – 16:00</td></tr>
+        <tr><td>Søndag</td><td>11:00 – 16:00</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <p class="section-tag reveal">Finn oss</p>
+    <h2 class="section-title reveal reveal-delay-1">Kontakt</h2>
+    <div class="contact-info reveal reveal-delay-2">
+      <div class="contact-row">
+        <div class="contact-icon">📍</div>
+        <div>
+          <div class="contact-label">Adresse</div>
+          <div class="contact-val">Kongens gate 48<br>7012 Trondheim</div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-icon">🕐</div>
+        <div>
+          <div class="contact-label">Åpningstider</div>
+          <div class="contact-val">Tirsdag – søndag, 11:00–16:00<br>Stengt mandag</div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-icon">📧</div>
+        <div>
+          <div class="contact-label">E-post</div>
+          <div class="contact-val"><a href="mailto:hyojinjung@outlook.com">hyojinjung@outlook.com</a></div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-icon">📞</div>
+        <div>
+          <div class="contact-label">Telefon</div>
+          <div class="contact-val"><a href="tel:+4797366822">+47 973 66 822</a></div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-icon">📸</div>
+        <div>
+          <div class="contact-label">Instagram</div>
+          <div class="contact-val"><a href="https://www.instagram.com/dalgona.no" target="_blank" rel="noopener">@dalgona.no</a></div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-icon">⭐</div>
+        <div>
+          <div class="contact-label">Google-vurdering</div>
+          <div class="contact-val">5,0 av 5 – 38 anmeldelser</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Dalgona<span>.</span></div>
+  <p class="footer-text">© 2025 Dalgona Bakeri · Kongens gate 48, Trondheim</p>
+  <div class="footer-social">
+    <a href="https://www.instagram.com/dalgona.no" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.facebook.com/p/Dalgona-61588234227869/" target="_blank" rel="noopener">Facebook</a>
+  </div>
+</footer>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.12 });
+reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
